@@ -98,7 +98,7 @@ const App: React.FC = () => {
         </header>
 
         {/* Counter - Centered vertically in remaining space */}
-        <main className="flex-1 flex flex-col h-full items-center justify-center scale-50 sm:scale-75 md:scale-100 transition-transform duration-500 origin-center py-10 md:py-0">
+        <main className="flex-1 flex flex-col h-full items-center justify-center scale-[0.35] xs:scale-50 sm:scale-75 md:scale-100 transition-transform duration-500 origin-center py-4 md:py-0 w-full">
           <div className="flex items-end gap-1 sm:gap-2 md:gap-3">
             {richDisplayArray.map((char, index) => (
               <TickDigit
