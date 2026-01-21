@@ -69,7 +69,7 @@ END:VCALENDAR`;
                 </h3>
                 <p className="text-sm text-gray-200 leading-relaxed">
                     Lieve vrienden. Binnenkort zal ik een <span className="text-yellow-300 font-bold">miljard seconden</span> rondlopen op deze prachtige aardbol.
-                    Kom dit vieren aan de <span className="font-bold">Zaagmolenkade 22 te Utrecht</span> op <span className="text-pink-300 font-bold">26 maart</span> (vanaf 17:00).
+                    Kom dit vieren tijdens een heerlijke DoMiBo aan de <span className="font-bold">Zaagmolenkade 22 te Utrecht</span> op <span className="text-pink-300 font-bold"> Donderdag 26 maart</span> (vanaf 17:00).
                 </p>
             </div>
 
