@@ -75,10 +75,10 @@ const App: React.FC = () => {
       <ClickEffects isActive={!isCelebration} />
 
       {/* Main Content */}
-      <div className="relative z-10 w-full min-h-screen flex flex-col items-center justify-center p-8 pointer-events-none">
+      <div className="relative z-10 w-full min-h-screen flex flex-col justify-between pointer-events-none overflow-y-auto overflow-x-hidden md:overflow-hidden">
 
-        {/* Header */}
-        <header className="absolute top-0 left-0 w-full p-4 md:p-8 flex flex-col items-center md:flex-row md:justify-between md:items-start pointer-events-auto z-50">
+        {/* Header - Flow on Mobile, Absolute on Desktop */}
+        <header className="relative md:absolute top-0 left-0 w-full p-4 md:p-8 flex flex-col items-center md:flex-row md:justify-between md:items-start pointer-events-auto z-50 shrink-0">
 
           {/* Invitation Card (Moves to top on mobile, Right on Desktop) */}
           <div className="w-full md:w-auto flex justify-center md:order-2 md:justify-end mb-4 md:mb-0">
@@ -97,23 +97,25 @@ const App: React.FC = () => {
           </div>
         </header>
 
-        {/* Counter */}
-        <main className="flex items-end gap-1 sm:gap-2 md:gap-3 scale-75 sm:scale-90 md:scale-100 transition-transform duration-500">
-          {richDisplayArray.map((char, index) => (
-            <TickDigit
-              key={`digit-${index}-${char === ',' ? 'comma' : 'num'}`}
-              digit={char}
-              height={140}
-            />
-          ))}
+        {/* Counter - Centered vertically in remaining space */}
+        <main className="flex-1 flex flex-col h-full items-center justify-center scale-50 sm:scale-75 md:scale-100 transition-transform duration-500 origin-center py-10 md:py-0">
+          <div className="flex items-end gap-1 sm:gap-2 md:gap-3">
+            {richDisplayArray.map((char, index) => (
+              <TickDigit
+                key={`digit-${index}-${char === ',' ? 'comma' : 'num'}`}
+                digit={char}
+                height={140}
+              />
+            ))}
+          </div>
+
+          <div className="mt-8 text-center bg-black/50 px-6 py-2 rounded-full backdrop-blur-sm">
+            <p className="uppercase tracking-[0.5em] text-sm font-semibold opacity-90">Totaal Aantal Seconden</p>
+          </div>
         </main>
 
-        <div className="mt-8 text-center bg-black/50 px-6 py-2 rounded-full backdrop-blur-sm">
-          <p className="uppercase tracking-[0.5em] text-sm font-semibold opacity-90">Totaal Aantal Seconden</p>
-        </div>
-
         {/* Footer Controls */}
-        <footer className="absolute bottom-0 w-full p-8 flex justify-between items-end pointer-events-auto">
+        <footer className="relative md:absolute bottom-0 w-full p-8 flex justify-between items-end pointer-events-auto shrink-0 bg-gradient-to-t from-black/80 to-transparent md:bg-none">
           <div className="flex flex-col gap-2 text-xs opacity-60">
             <p>Geboren: 18-07-1994 17:27 (UTC+1)</p>
           </div>
