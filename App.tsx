@@ -51,6 +51,20 @@ const App: React.FC = () => {
 
   const isCelebration = displaySeconds >= BILLION;
 
+  const [playCelebration] = useState(() => {
+    const audio = new Audio('/assets/celebrate.mp3');
+    audio.volume = 0.5;
+    return audio;
+  });
+
+  const [controlsHidden, setControlsHidden] = useState(true);
+
+  useEffect(() => {
+    if (isCelebration) {
+      playCelebration.play().catch(e => console.error("Audio play failed", e));
+    }
+  }, [isCelebration, playCelebration]);
+
   // Helper to get separate digits including commas
   const richDisplayArray = useMemo(() => {
     const s = displaySeconds.toString().padStart(10, '0');
@@ -82,7 +96,7 @@ const App: React.FC = () => {
 
           {/* Invitation Card (Moves to top on mobile, Right on Desktop) */}
           <div className="w-full md:w-auto flex justify-center md:order-2 md:justify-end mb-4 md:mb-0">
-            <InvitationCard />
+            <InvitationCard onTriggerSecret={() => setControlsHidden(false)} />
           </div>
 
           {/* Title Text (Hidden on mobile, Visible on Desktop, Left on Desktop) */}
@@ -121,12 +135,14 @@ const App: React.FC = () => {
           </div>
 
           <div className="flex gap-4">
-            <button
-              onClick={() => setShowControls(!showControls)}
-              className="text-sm uppercase font-bold tracking-widest border border-white/40 px-4 py-2 hover:bg-white hover:text-black transition-colors bg-black/50 backdrop-blur-sm"
-            >
-              Besturing
-            </button>
+            {!controlsHidden && (
+              <button
+                onClick={() => setShowControls(!showControls)}
+                className="text-sm uppercase font-bold tracking-widest border border-white/40 px-4 py-2 hover:bg-white hover:text-black transition-colors bg-black/50 backdrop-blur-sm"
+              >
+                Besturing
+              </button>
+            )}
           </div>
         </footer>
       </div>

@@ -5,8 +5,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 const imageModules = import.meta.glob('../public/assets/nathan pics/*.{png,jpg,jpeg,webp}', { eager: true, import: 'default' });
 const IMAGE_URLS = Object.values(imageModules) as string[];
 
-export const InvitationCard: React.FC = () => {
+interface InvitationCardProps {
+    onTriggerSecret?: () => void;
+}
+
+export const InvitationCard: React.FC<InvitationCardProps> = ({ onTriggerSecret }) => {
     const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
+    const [secretClicks, setSecretClicks] = React.useState(0);
 
     React.useEffect(() => {
         if (IMAGE_URLS.length === 0) return;
@@ -15,6 +20,16 @@ export const InvitationCard: React.FC = () => {
         }, 2000);
         return () => clearInterval(interval);
     }, []);
+
+    const handleImageClick = () => {
+        const newCount = secretClicks + 1;
+        setSecretClicks(newCount);
+        if (newCount === 5 && onTriggerSecret) {
+            onTriggerSecret();
+            // Optional: distinct visual cue?
+        }
+    };
+
 
     // Google Calendar Link Construction
     const title = encodeURIComponent("Nathan's 1 Miljardste Seconde & DoMiBo");
@@ -63,7 +78,11 @@ END:VCALENDAR`;
 
                 {/* Left: Slideshow */}
                 {IMAGE_URLS.length > 0 && (
-                    <div className="flex-shrink-0 w-20 h-20 md:w-24 md:h-24 relative">
+                    <div
+                        className="flex-shrink-0 w-20 h-20 md:w-24 md:h-24 relative cursor-pointer active:scale-95 transition-transform"
+                        onClick={handleImageClick}
+                        title="???"
+                    >
                         <motion.div
                             animate={{ y: [0, -5, 0] }}
                             transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
