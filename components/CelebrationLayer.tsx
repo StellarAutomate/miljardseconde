@@ -21,7 +21,7 @@ export const CelebrationLayer: React.FC<CelebrationLayerProps> = ({ active }) =>
             audio.play().catch(e => console.log("Audio play blocked", e));
 
             // Confetti
-            const duration = 15 * 1000;
+            const duration = 120 * 1000;
             const animationEnd = Date.now() + duration;
 
             const interval = setInterval(() => {
