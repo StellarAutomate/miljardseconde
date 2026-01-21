@@ -59,6 +59,50 @@ export const ClickEffects: React.FC<ClickEffectProps> = ({ isActive }) => {
         };
     }, [isActive]);
 
+    // Random Auto-Spawn Logic
+    useEffect(() => {
+        if (!isActive || GIF_URLS.length === 0) return;
+
+        let timeoutId: NodeJS.Timeout;
+
+        const spawnRandomGif = () => {
+            // Random delay between 2s and 8s (avg 5s)
+            const delay = 2000 + Math.random() * 6000;
+
+            timeoutId = setTimeout(() => {
+                const id = Date.now();
+                const src = GIF_URLS[Math.floor(Math.random() * GIF_URLS.length)];
+
+                // Random position (avoiding edges slightly)
+                const x = 10 + Math.random() * 80; // %
+                const y = 10 + Math.random() * 80; // %
+
+                const newSpawn: SpawnedGif = {
+                    id,
+                    x: window.innerWidth * (x / 100),
+                    y: window.innerHeight * (y / 100),
+                    rotation: (Math.random() - 0.5) * 60,
+                    scale: 0.5 + Math.random() * 1.5,
+                    src
+                };
+
+                setSpawns(prev => [...prev, newSpawn]);
+
+                // Cleanup spawn
+                setTimeout(() => {
+                    setSpawns(prev => prev.filter(s => s.id !== id));
+                }, 3000);
+
+                // Schedule next spawn
+                spawnRandomGif();
+            }, delay);
+        };
+
+        spawnRandomGif();
+
+        return () => clearTimeout(timeoutId);
+    }, [isActive]);
+
     return (
         <div className="fixed inset-0 pointer-events-none z-40 overflow-hidden">
             <AnimatePresence>

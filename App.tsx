@@ -78,8 +78,15 @@ const App: React.FC = () => {
       <div className="relative z-10 w-full min-h-screen flex flex-col items-center justify-center p-8 pointer-events-none">
 
         {/* Header */}
-        <header className="absolute top-0 left-0 w-full p-8 flex justify-between items-start pointer-events-auto">
-          <div className="flex flex-col drop-shadow-md">
+        <header className="absolute top-0 left-0 w-full p-4 md:p-8 flex flex-col items-center md:flex-row md:justify-between md:items-start pointer-events-auto z-50">
+
+          {/* Invitation Card (Moves to top on mobile, Right on Desktop) */}
+          <div className="w-full md:w-auto flex justify-center md:order-2 md:justify-end mb-4 md:mb-0">
+            <InvitationCard />
+          </div>
+
+          {/* Title Text (Hidden on mobile, Visible on Desktop, Left on Desktop) */}
+          <div className="hidden md:flex flex-col drop-shadow-md md:order-1 text-left">
             <h1 className="text-4xl font-bold uppercase tracking-widest flex items-center gap-2">
               <span className="inline-block w-4 h-4 bg-yellow-400"></span>
               Aantal seconden dat Nathan leeft
@@ -87,10 +94,6 @@ const App: React.FC = () => {
             <p className="text-xl opacity-80 mt-1 font-light tracking-wide">
               Seconden sinds geboorte
             </p>
-          </div>
-
-          <div className="hidden md:block">
-            <InvitationCard />
           </div>
         </header>
 
