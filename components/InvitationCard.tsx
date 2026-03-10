@@ -35,7 +35,7 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({ onTriggerSecret 
     const title = encodeURIComponent("Nathan's 1 Miljardste Seconde & DoMiBo");
     const dates = "20260326T170000/20260326T230000";
     const details = encodeURIComponent("Vier dit unieke moment met mij! Lieve vrienden, binnenkort zal ik een miljard seconden rondlopen op deze prachtige aardbol. Kom dit vieren!");
-    const location = encodeURIComponent("Zaagmolenkade 22, Utrecht");
+    const location = encodeURIComponent("Bijlmerplein 888F6, Amsterdam");
 
     // ICS File Generation Logic (for download)
     const downloadIcs = () => {
@@ -47,7 +47,7 @@ DTSTART:20260326T170000
 DTEND:20260326T230000
 SUMMARY:Nathan's 1 Miljardste Seconde
 DESCRIPTION:Vier dit unieke moment met mij!
-LOCATION:Zaagmolenkade 22, Utrecht
+LOCATION:Bijlmerplein 888F6 , Amsterdam
 END:VEVENT
 END:VCALENDAR`;
         const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
@@ -69,7 +69,7 @@ END:VCALENDAR`;
                 </h3>
                 <p className="text-sm text-gray-200 leading-relaxed">
                     Lieve vrienden. Binnenkort zal ik een <span className="text-yellow-300 font-bold">miljard seconden</span> rondlopen op deze prachtige aardbol.
-                    Kom dit vieren tijdens een heerlijke DoMiBo aan de <span className="font-bold">Zaagmolenkade 22 te Utrecht</span> op <span className="text-pink-300 font-bold"> Donderdag 26 maart</span> (vanaf 17:00).
+                    Kom dit vieren tijdens een heerlijke DoMiBo aan de <span className="font-bold">Bijlmerplein 888F6 te Amsterdam</span> op <span className="text-pink-300 font-bold"> Donderdag 26 maart</span> (vanaf 17:00).
                 </p>
             </div>
 
