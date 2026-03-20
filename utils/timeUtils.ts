@@ -3,7 +3,7 @@ import { BirthConfig } from '../types';
 // User Config: 18-07-1994 05:27 Amsterdam (UTC+1 as requested)
 // Note: Technically Amsterdam in July is UTC+2 (CEST), but user specified UTC+1. 
 // We will construct the date strictly based on the ISO string with offset.
-const BIRTH_ISO = "1994-07-18T17:27:00+01:00";
+const BIRTH_ISO = "1994-07-18T17:27:00+02:00";
 const BILLION = 1_000_000_000;
 
 export const getBirthDate = (): Date => {
