@@ -130,8 +130,20 @@ const App: React.FC = () => {
 
         {/* Footer Controls */}
         <footer className="relative md:absolute bottom-0 w-full p-8 flex justify-between items-end pointer-events-auto shrink-0 bg-gradient-to-t from-black/80 to-transparent md:bg-none">
-          <div className="flex flex-col gap-2 text-xs opacity-60">
-            <p>Geboren: 18-07-1994 17:27 (UTC+1)</p>
+          <div className="flex flex-col text-xs opacity-60">
+             <p>Geboren: 18-07-1994 17:27 (UTC+1)</p>
+             <AnimatePresence>
+               {!controlsHidden && (
+                 <motion.p
+                   initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                   animate={{ opacity: 1, height: 'auto', marginTop: 8 }}
+                   exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                   className="text-yellow-300 font-bold"
+                 >
+                   1 Miljardste seconde: {formattedMilestone}
+                 </motion.p>
+               )}
+             </AnimatePresence>
           </div>
 
           <div className="flex gap-4">
