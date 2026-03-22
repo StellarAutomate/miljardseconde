@@ -10,6 +10,7 @@ import { InvitationCard } from './components/InvitationCard';
 
 const App: React.FC = () => {
   const [seconds, setSeconds] = useState<number>(0);
+  const [currentTime, setCurrentTime] = useState<Date>(new Date());
   const [isTestMode, setIsTestMode] = useState(false);
   const [showControls, setShowControls] = useState(false);
 
@@ -20,11 +21,15 @@ const App: React.FC = () => {
   // but let's keep it if we ever want to revert or debug. 
   // Actually, the InvitationCard replaces the generic milestone text.
   const formattedMilestone = useMemo(() => formatFutureDate(billionthDate), [billionthDate]);
+  
+  const formattedCurrentTime = useMemo(() => formatFutureDate(currentTime), [currentTime]);
 
   useEffect(() => {
     setSeconds(calculateSecondsAlive());
+    setCurrentTime(new Date());
     const interval = setInterval(() => {
       setSeconds(calculateSecondsAlive());
+      setCurrentTime(new Date());
     }, 1000);
     return () => clearInterval(interval);
   }, []);
@@ -134,14 +139,19 @@ const App: React.FC = () => {
              <p>Geboren: 18-07-1994 17:27 (UTC+1)</p>
              <AnimatePresence>
                {!controlsHidden && (
-                 <motion.p
+                 <motion.div
                    initial={{ opacity: 0, height: 0, marginTop: 0 }}
                    animate={{ opacity: 1, height: 'auto', marginTop: 8 }}
                    exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                   className="text-yellow-300 font-bold"
+                   className="flex flex-col gap-1"
                  >
-                   1 Miljardste seconde: {formattedMilestone}
-                 </motion.p>
+                   <p className="text-yellow-300 font-bold">
+                     1 Miljardste seconde: {formattedMilestone}
+                   </p>
+                   <p className="text-blue-300 font-bold">
+                     Huidige tijd: {formattedCurrentTime}
+                   </p>
+                 </motion.div>
                )}
              </AnimatePresence>
           </div>
